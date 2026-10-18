@@ -1644,7 +1644,7 @@
 
     let authMode = 'login';
     let currentSession = null;
-    let supabase = null;
+    let supabaseClient = null;
 
     const configured =
         SUPABASE_PUBLISHABLE_KEY.startsWith('sb_publishable_') &&
@@ -1652,7 +1652,7 @@
 
 
     if (window.supabase && configured) {
-        supabase = window.supabase.createClient(
+        supabaseClient = window.supabase.createClient(
             SUPABASE_URL,
             SUPABASE_PUBLISHABLE_KEY
         );
@@ -1784,7 +1784,7 @@
     }
 
     async function refreshSession() {
-        if (!supabase) {
+        if (!supabaseClient)
             return;
         }
 
@@ -1849,7 +1849,7 @@
     authForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        if (!configured || !supabase) {
+        if (!configured || !supabaseClient) {
             toast(
                 'Supabase ещё не подключён',
                 'Вставь свой sb_publishable_ key в index.html.',
