@@ -1,189 +1,1826 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#100a07">
-    <meta name="description" content="Bear Visuals — визуальный мод для Minecraft.">
-    <title>Bear Visuals — Visuals. Your Style.</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100a07">
+<meta name="description" content="Bear Visuals — визуальный мод для Minecraft 1.21.11.">
+<title>Bear Visuals — Visuals. Your Style.</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --bg: #100a07;
-            --bg-light: #160d09;
-            --panel: #1c110c;
-            --panel-light: #24160f;
-            --brown: #8b5a2b;
-            --accent: #b8793e;
-            --gold: #d29a61;
-            --text: #fff4e8;
-            --muted: #b8a99d;
-            --soft: #77685d;
-            --border: rgba(210, 154, 97, 0.18);
-            --green: #9ed7aa;
-            --red: #ff9288;
-            --radius: 16px;
-            --max-width: 1160px;
+<style>
+:root {
+    --bg: #100a07;
+    --bg2: #160d09;
+    --panel: #1c110c;
+    --panel2: #24160f;
+    --brown: #8b5a2b;
+    --accent: #b8793e;
+    --gold: #d29a61;
+    --text: #fff4e8;
+    --muted: #b8a99d;
+    --soft: #77685d;
+    --border: rgba(210,154,97,.18);
+    --green: #9ed7aa;
+    --red: #ff9288;
+    --radius: 16px;
+    --max-width: 1160px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(139,90,43,.18), transparent 48%),
+        var(--bg);
+    color: var(--text);
+    font-family: Manrope, "Segoe UI", Arial, sans-serif;
+    line-height: 1.55;
+}
+
+body, button, input {
+    font-family: Manrope, "Segoe UI", Arial, sans-serif;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: .55;
+    cursor: wait;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.wrap {
+    width: min(var(--max-width), calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.nav {
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    border-bottom: 1px solid rgba(210,154,97,.09);
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    flex-shrink: 0;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -.4px;
+}
+
+.brand-mark {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(210,154,97,.42);
+    border-radius: 12px;
+    background: linear-gradient(145deg,#57351f,#24160f);
+    box-shadow: 0 0 24px rgba(184,121,62,.12);
+    color: var(--gold);
+    font-size: 22px;
+}
+
+.brand small {
+    display: block;
+    color: var(--soft);
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.nav-links, .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links {
+    color: #c1b0a3;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.nav-links a:hover, .footer-links a:hover {
+    color: var(--gold);
+}
+
+.nav-actions {
+    gap: 9px;
+}
+
+.btn {
+    min-height: 43px;
+    padding: 0 17px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(255,255,255,.025);
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 800;
+    transition: transform .18s,border-color .18s,filter .18s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    border-color: rgba(210,154,97,.5);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg,#b8793e,#8b5a2b);
+    border-color: rgba(255,221,181,.12);
+    box-shadow: 0 7px 26px rgba(139,90,43,.16);
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+}
+
+.hero {
+    padding: 82px 0 70px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    align-items: center;
+    gap: 58px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(184,121,62,.06);
+    color: #d5ae87;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 12px rgba(210,154,97,.65);
+}
+
+h1 {
+    max-width: 690px;
+    margin: 24px 0 20px;
+    font-size: clamp(42px,6vw,70px);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -3.5px;
+}
+
+h1 span {
+    color: var(--gold);
+}
+
+.hero-copy {
+    max-width: 570px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 27px;
+}
+
+.hero-note {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 25px;
+    color: #8d7b6d;
+    font-size: 10px;
+}
+
+.hero-note strong {
+    color: #d4c0ae;
+}
+
+.preview {
+    position: relative;
+    padding: 13px;
+    border: 1px solid rgba(210,154,97,.2);
+    border-radius: 22px;
+    background: linear-gradient(145deg,rgba(44,27,18,.88),rgba(19,12,9,.96));
+    box-shadow: 0 32px 100px rgba(0,0,0,.35);
+    transform: rotate(1deg);
+}
+
+.preview-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px 15px;
+    color: #a38b78;
+    font-size: 10px;
+}
+
+.window-dots {
+    display: flex;
+    gap: 5px;
+}
+
+.window-dots i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #765239;
+}
+
+.preview-panel {
+    padding: 19px;
+    border: 1px solid rgba(210,154,97,.12);
+    border-radius: 14px;
+    background: rgba(12,8,6,.48);
+}
+
+.preview-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 17px;
+}
+
+.preview-heading b {
+    font-size: 15px;
+}
+
+.preview-heading small {
+    color: var(--soft);
+    font-size: 10px;
+}
+
+.module-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid rgba(210,154,97,.11);
+    border-radius: 10px;
+    background: rgba(255,255,255,.018);
+}
+
+.module-left {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.module-icon {
+    width: 31px;
+    height: 31px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: rgba(184,121,62,.12);
+    color: var(--gold);
+}
+
+.module-row b {
+    display: block;
+    font-size: 11px;
+}
+
+.module-row small {
+    display: block;
+    margin-top: 2px;
+    color: var(--soft);
+    font-size: 9px;
+}
+
+.switch {
+    width: 29px;
+    height: 16px;
+    padding: 3px;
+    border-radius: 20px;
+    background: #493222;
+}
+
+.switch::after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin-left: 13px;
+    border-radius: 50%;
+    background: var(--gold);
+}
+
+.preview-footer {
+    display: flex;
+    gap: 8px;
+    margin-top: 13px;
+}
+
+.preview-stat {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid rgba(210,154,97,.1);
+    border-radius: 9px;
+    background: rgba(184,121,62,.055);
+}
+
+.preview-stat small {
+    display: block;
+    color: var(--soft);
+    font-size: 9px;
+}
+
+.preview-stat b {
+    font-size: 14px;
+    color: #ead5c1;
+}
+
+.float-tag {
+    position: absolute;
+    right: -12px;
+    bottom: 35px;
+    padding: 12px 15px;
+    border: 1px solid rgba(210,154,97,.25);
+    border-radius: 12px;
+    background: #21140e;
+    box-shadow: 0 12px 35px #0005;
+    color: #c7ad97;
+    font-size: 10px;
+}
+
+.float-tag strong {
+    color: var(--gold);
+}
+
+.announcement {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 20px;
+    margin: 6px 0 70px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: linear-gradient(100deg,rgba(139,90,43,.11),rgba(28,17,12,.75));
+}
+
+.announce-icon, .feature-icon {
+    width: 39px;
+    height: 39px;
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 11px;
+    background: rgba(184,121,62,.12);
+    color: var(--gold);
+    font-size: 17px;
+}
+
+.announcement strong {
+    display: block;
+    font-size: 12px;
+}
+
+.announcement p {
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.announce-link {
+    margin-left: auto;
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+section {
+    scroll-margin-top: 35px;
+}
+
+.features, .news {
+    padding-bottom: 88px;
+}
+
+.section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 28px;
+}
+
+.section-kicker {
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.section-head h2 {
+    margin: 9px 0 0;
+    font-size: clamp(28px,3.6vw,42px);
+    line-height: 1.12;
+    letter-spacing: -1.7px;
+}
+
+.section-head p {
+    max-width: 430px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 14px;
+}
+
+.feature {
+    min-height: 180px;
+    padding: 23px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(145deg,rgba(36,22,15,.83),rgba(24,15,11,.76));
+    transition: transform .2s,border-color .2s;
+}
+
+.feature:hover {
+    transform: translateY(-3px);
+    border-color: rgba(210,154,97,.38);
+}
+
+.feature h3 {
+    margin: 17px 0 7px;
+    font-size: 14px;
+}
+
+.feature p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.news-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 23px 25px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgba(28,17,12,.62);
+}
+
+.news-label {
+    color: var(--gold);
+    font-size: 9px;
+    letter-spacing: 1.4px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.news-card h3 {
+    margin: 8px 0 5px;
+    font-size: 16px;
+}
+
+.news-card p {
+    max-width: 690px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.news-date {
+    color: var(--soft);
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.pricing {
+    padding: 4px 0 95px;
+}
+
+.pricing .section-head {
+    margin-bottom: 35px;
+}
+
+.plans {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    align-items: stretch;
+    gap: 15px;
+}
+
+.plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 350px;
+    padding: 25px 23px 22px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: linear-gradient(160deg,rgba(36,22,15,.8),rgba(23,14,10,.9));
+}
+
+.plan.featured {
+    border-color: rgba(210,154,97,.6);
+    box-shadow: 0 12px 45px rgba(139,90,43,.1);
+}
+
+.popular {
+    position: absolute;
+    top: -12px;
+    right: 18px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff5eb;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.plan-type {
+    color: #d7c4b3;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.plan h3 {
+    margin: 9px 0;
+    font-size: 23px;
+    letter-spacing: -.7px;
+}
+
+.price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 8px 0 7px;
+}
+
+.price strong {
+    font-size: 35px;
+    letter-spacing: -1.5px;
+}
+
+.price span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.plan-desc {
+    min-height: 36px;
+    margin: 0 0 18px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.plan ul {
+    padding: 17px 0 0;
+    margin: 0 0 24px;
+    border-top: 1px solid rgba(210,154,97,.11);
+    list-style: none;
+}
+
+.plan li {
+    display: flex;
+    align-items: start;
+    gap: 8px;
+    margin: 10px 0;
+    color: #d0bfb0;
+    font-size: 10px;
+}
+
+.check {
+    color: var(--gold);
+    font-weight: 900;
+}
+
+.plan .btn {
+    width: 100%;
+    margin-top: auto;
+}
+
+.pricing-footnote {
+    max-width: 690px;
+    margin: 17px auto 0;
+    color: var(--soft);
+    text-align: center;
+    font-size: 10px;
+}
+
+.account-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 26px;
+    margin-bottom: 82px;
+    border: 1px solid rgba(210,154,97,.16);
+    border-radius: 17px;
+    background:
+        radial-gradient(ellipse at right,rgba(139,90,43,.15),transparent 55%),
+        #1b100b;
+}
+
+.account-strip h3 {
+    margin: 0 0 5px;
+    font-size: 16px;
+}
+
+.account-strip p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+footer {
+    padding: 28px 0 35px;
+    border-top: 1px solid rgba(210,154,97,.1);
+    color: var(--soft);
+    font-size: 10px;
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* ОКНО ВХОДА И РЕГИСТРАЦИИ */
+
+.modal-backdrop {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 20px;
+    background: rgba(5,3,2,.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-backdrop.open {
+    display: flex;
+}
+
+.modal {
+    position: relative;
+    width: min(100%,420px);
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    padding: 29px;
+    border: 1px solid rgba(210,154,97,.35);
+    border-radius: 17px;
+    background: linear-gradient(145deg,#24160f,#130c08);
+    box-shadow: 0 28px 100px rgba(0,0,0,.65);
+    animation: modalIn .18s ease-out;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(.985);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 17px;
+    width: 31px;
+    height: 31px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 18px;
+}
+
+.modal-close:hover {
+    background: rgba(255,255,255,.06);
+    color: var(--text);
+}
+
+.modal h2 {
+    margin: 8px 0 5px;
+    font-size: 24px;
+    letter-spacing: -1px;
+}
+
+.modal-intro {
+    margin: 0 0 20px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    padding: 4px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(210,154,97,.13);
+    border-radius: 10px;
+    background: rgba(0,0,0,.17);
+}
+
+.tab {
+    padding: 9px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.tab.active {
+    background: rgba(184,121,62,.16);
+    color: var(--gold);
+}
+
+.field {
+    display: block;
+    margin: 13px 0;
+}
+
+.field span {
+    display: block;
+    margin-bottom: 7px;
+    color: #ddc8b5;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.field input {
+    display: block;
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 12px;
+}
+
+.field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(184,121,62,.1);
+}
+
+.modal .btn {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.modal-help {
+    margin-top: 14px;
+    color: var(--soft);
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.account-state {
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: rgba(184,121,62,.07);
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+.account-state span {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* УВЕДОМЛЕНИЯ */
+
+.toast-stack {
+    position: fixed;
+    z-index: 2000;
+    top: 18px;
+    right: 18px;
+    display: grid;
+    gap: 9px;
+    width: min(360px,calc(100vw - 36px));
+    pointer-events: none;
+}
+
+.toast {
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: #24160f;
+    box-shadow: 0 14px 40px rgba(0,0,0,.4);
+    color: var(--text);
+    font-size: 11px;
+    overflow-wrap: anywhere;
+    animation: toastIn .2s ease;
+}
+
+.toast.success {
+    border-color: rgba(158,215,170,.4);
+}
+
+.toast.error {
+    border-color: rgba(255,146,136,.45);
+}
+
+.toast small {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+@keyframes toastIn {
+    from {
+        transform: translateY(-5px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+
+@media (max-width: 850px) {
+    .nav-links {
+        gap: 14px;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .preview {
+        width: 100%;
+        max-width: 510px;
+        margin: 10px auto 0;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .plans {
+        grid-template-columns: 1fr;
+        max-width: 490px;
+        margin: auto;
+        gap: 20px;
+    }
+
+    .plan {
+        min-height: auto;
+    }
+
+    .plan-desc {
+        min-height: 0;
+    }
+
+    .section-head {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .hero {
+        padding: 62px 0;
+    }
+}
+
+@media (max-width: 620px) {
+    .wrap {
+        width: calc(100% - 28px);
+    }
+
+    .nav {
+        min-height: 68px;
+        gap: 10px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .brand {
+        gap: 8px;
+        font-size: 12px;
+    }
+
+    .brand-mark {
+        width: 35px;
+        height: 35px;
+    }
+
+    .brand small {
+        font-size: 8px;
+        letter-spacing: 1.5px;
+    }
+
+    .nav-actions .btn {
+        min-height: 38px;
+        padding: 0 10px;
+        font-size: 10px;
+    }
+
+    .hero {
+        padding: 48px 0;
+    }
+
+    h1 {
+        font-size: 44px;
+        letter-spacing: -2.5px;
+    }
+
+    .hero-copy {
+        font-size: 13px;
+    }
+
+    .hero-buttons .btn {
+        flex: 1;
+    }
+
+    .announcement {
+        align-items: start;
+        padding: 14px;
+        margin-bottom: 52px;
+    }
+
+    .announce-link {
+        display: none;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature {
+        min-height: auto;
+    }
+
+    .news-card {
+        grid-template-columns: 1fr;
+        padding: 19px;
+    }
+
+    .news-date {
+        white-space: normal;
+    }
+
+    .account-strip {
+        align-items: start;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .footer-inner {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .modal {
+        padding: 24px 20px;
+    }
+
+    .float-tag {
+        right: 4px;
+        bottom: 24px;
+    }
+
+    .preview {
+        transform: none;
+    }
+
+    .preview-stat b {
+        font-size: 11px;
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header class="nav">
+    <a class="brand" href="#top" aria-label="Bear Visuals — главная">
+        <span class="brand-mark">B</span>
+        <span>
+            BEAR VISUALS
+            <small>CLIENT VISUAL MOD</small>
+        </span>
+    </a>
+
+    <nav class="nav-links" aria-label="Основная навигация">
+        <a href="#features">Возможности</a>
+        <a href="#news">Новости</a>
+        <a href="#plans">Лицензии</a>
+    </nav>
+
+    <div class="nav-actions">
+        <button class="btn" id="accountButton" type="button">Войти</button>
+        <a class="btn btn-primary" href="#plans">Купить доступ ↗</a>
+    </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+    <div class="hero-grid">
+        <div>
+            <div class="eyebrow">
+                <span class="dot"></span>
+                BEAR VISUALS · MINECRAFT 1.21.11
+            </div>
+
+            <h1>Твой стиль.<br><span>Твои визуалы.</span></h1>
+
+            <p class="hero-copy">
+                Bear Visuals — клиентский мод с визуальными настройками,
+                удобным Click GUI и собственной системой лицензий.
+                Настраивай игру под себя в тёплом медвежьем стиле.
+            </p>
+
+            <div class="hero-buttons">
+                <a class="btn btn-primary" href="#plans">Посмотреть лицензии →</a>
+                <button class="btn" id="heroAccountButton" type="button">Мой аккаунт</button>
+            </div>
+
+            <div class="hero-note">
+                <span class="dot"></span>
+                <span><strong>Лицензия привязана к устройству</strong> · Проверка доступа через сервер</span>
+            </div>
+        </div>
+
+        <div class="preview">
+            <div class="preview-top">
+                <span>BEAR VISUALS / CLICK GUI</span>
+                <span class="window-dots"><i></i><i></i><i></i></span>
+            </div>
+
+            <div class="preview-panel">
+                <div class="preview-heading">
+                    <div><b>Модули</b><br><small>Настрой свой интерфейс</small></div>
+                    <span class="eyebrow">1.21.11</span>
+                </div>
+
+                <div class="module-row">
+                    <div class="module-left">
+                        <span class="module-icon">◈</span>
+                        <div><b>FullBright</b><small>Освещение мира</small></div>
+                    </div>
+                    <div class="switch"></div>
+                </div>
+
+                <div class="module-row">
+                    <div class="module-left">
+                        <span class="module-icon">⌗</span>
+                        <div><b>Armor HUD</b><small>Прочность брони</small></div>
+                    </div>
+                    <div class="switch"></div>
+                </div>
+
+                <div class="module-row">
+                    <div class="module-left">
+                        <span class="module-icon">✧</span>
+                        <div><b>Custom Sky</b><small>Атмосфера мира</small></div>
+                    </div>
+                    <div class="switch"></div>
+                </div>
+
+                <div class="preview-footer">
+                    <div class="preview-stat"><small>ТВОЙ КЛИЕНТ</small><b>Bear Visuals</b></div>
+                    <div class="preview-stat"><small>СТИЛЬ</small><b>Warm Brown</b></div>
+                </div>
+            </div>
+
+            <div class="float-tag"><strong>✦ Bear Visuals</strong><br>Visuals made personal</div>
+        </div>
+    </div>
+</section>
+
+<aside class="announcement">
+    <div class="announce-icon">✦</div>
+    <div>
+        <strong>Добро пожаловать в Bear Visuals</strong>
+        <p>Следи за обновлениями, выбирай лицензию и управляй своим доступом из одного места.</p>
+    </div>
+    <a class="announce-link" href="#news">Обновления →</a>
+</aside>
+
+<section class="features" id="features">
+    <div class="section-head">
+        <div>
+            <div class="section-kicker">Почему Bear Visuals</div>
+            <h2>Всё нужное.<br>Ничего лишнего.</h2>
+        </div>
+        <p>Клиентский интерфейс, система модулей и управление лицензией — в едином стиле Bear Visuals.</p>
+    </div>
+
+    <div class="feature-grid">
+        <article class="feature">
+            <div class="feature-icon">⌘</div>
+            <h3>Удобный Click GUI</h3>
+            <p>Коричневая тема, категории модулей, поиск и настройки — всё в одном интерфейсе.</p>
+        </article>
+
+        <article class="feature">
+            <div class="feature-icon">◈</div>
+            <h3>Визуальные модули</h3>
+            <p>Настройки внешнего вида и HUD, которые можно подстроить под свой стиль игры.</p>
+        </article>
+
+        <article class="feature">
+            <div class="feature-icon">♙</div>
+            <h3>Личный аккаунт</h3>
+            <p>Регистрация и вход для управления доступом к Bear Visuals.</p>
+        </article>
+
+        <article class="feature">
+            <div class="feature-icon">↻</div>
+            <h3>Обновления проекта</h3>
+            <p>Новости и объявления помогут следить за развитием проекта.</p>
+        </article>
+
+        <article class="feature">
+            <div class="feature-icon">⌁</div>
+            <h3>Разные тарифы</h3>
+            <p>Выбери ограниченную по времени лицензию или вариант навсегда.</p>
+        </article>
+
+        <article class="feature">
+            <div class="feature-icon">♧</div>
+            <h3>Стиль Bear Visuals</h3>
+            <p>Тёплая коричневая палитра, аккуратные карточки и плавные детали интерфейса.</p>
+        </article>
+    </div>
+</section>
+
+<section class="news" id="news">
+    <div class="section-head">
+        <div>
+            <div class="section-kicker">Объявления</div>
+            <h2>Новости проекта</h2>
+        </div>
+        <p>Здесь можно публиковать обновления, технические работы и сообщения для пользователей.</p>
+    </div>
+
+    <article class="news-card">
+        <div>
+            <span class="news-label">Объявление · Главная</span>
+            <h3>Сайт Bear Visuals открыт</h3>
+            <p>Зарегистрируй аккаунт, ознакомься с вариантами лицензии и следи за обновлениями проекта.</p>
+        </div>
+        <div class="news-date">18 октября 2026</div>
+    </article>
+</section>
+
+<section class="pricing" id="plans">
+    <div class="section-head">
+        <div>
+            <div class="section-kicker">Выбери свой доступ</div>
+            <h2>Лицензии Bear Visuals</h2>
+        </div>
+        <p>Выбери подходящий план. Для оформления заказа потребуется аккаунт.</p>
+    </div>
+
+    <div class="plans">
+        <article class="plan">
+            <div class="plan-type">STARTER</div>
+            <h3>1 месяц</h3>
+            <div class="price"><strong>49 ₽</strong><span>/ месяц</span></div>
+            <p class="plan-desc">Попробуй Bear Visuals на месяц.</p>
+            <ul>
+                <li><span class="check">✓</span> Доступ на 1 месяц</li>
+                <li><span class="check">✓</span> Обновления в период лицензии</li>
+                <li><span class="check">✓</span> Привязка к одному устройству</li>
+            </ul>
+            <button class="btn" data-buy="1_month" type="button">Выбрать на месяц</button>
+        </article>
+
+        <article class="plan featured">
+            <span class="popular">Популярный</span>
+            <div class="plan-type">BEST VALUE</div>
+            <h3>3 месяца</h3>
+            <div class="price"><strong>149 ₽</strong><span>/ 3 месяца</span></div>
+            <p class="plan-desc">Больше времени для комфортной игры.</p>
+            <ul>
+                <li><span class="check">✓</span> Доступ на 3 месяца</li>
+                <li><span class="check">✓</span> Обновления в период лицензии</li>
+                <li><span class="check">✓</span> Привязка к одному устройству</li>
+            </ul>
+            <button class="btn btn-primary" data-buy="3_months" type="button">Выбрать на 3 месяца</button>
+        </article>
+
+        <article class="plan">
+            <div class="plan-type">LIFETIME</div>
+            <h3>Навсегда</h3>
+            <div class="price"><strong>349 ₽</strong><span>/ единоразово</span></div>
+            <p class="plan-desc">Одна покупка для постоянного доступа.</p>
+            <ul>
+                <li><span class="check">✓</span> Пожизненная лицензия</li>
+                <li><span class="check">✓</span> Обновления проекта</li>
+                <li><span class="check">✓</span> Привязка к одному устройству</li>
+            </ul>
+            <button class="btn" data-buy="lifetime" type="button">Купить навсегда</button>
+        </article>
+    </div>
+
+    <p class="pricing-footnote">
+        Цены указаны в рублях. Онлайн-оплата ещё не подключена.
+        Покупка станет доступна после настройки платёжного сервиса.
+    </p>
+</section>
+
+<section class="account-strip">
+    <div>
+        <h3>Уже есть аккаунт?</h3>
+        <p>Войди, чтобы перейти к оформлению заказа.</p>
+    </div>
+    <button class="btn btn-primary" id="bottomAccountButton" type="button">Войти или зарегистрироваться →</button>
+</section>
+
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <a class="brand" href="#top">
+            <span class="brand-mark">B</span>
+            <span>BEAR VISUALS<small>CLIENT VISUAL MOD</small></span>
+        </a>
+        <div>© 2026 Bear Visuals. Неофициальный клиентский мод Minecraft.</div>
+        <div class="footer-links">
+            <a href="#features">Возможности</a>
+            <a href="#news">Новости</a>
+            <a href="#plans">Лицензии</a>
+        </div>
+    </div>
+</footer>
+
+</div>
+
+<!-- ОКНО ВХОДА И РЕГИСТРАЦИИ -->
+
+<div class="modal-backdrop" id="authBackdrop" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal">
+        <button class="modal-close" id="closeAuth" type="button" aria-label="Закрыть">×</button>
+
+        <div class="section-kicker">Bear Visuals Account</div>
+        <h2 id="authTitle">С возвращением</h2>
+        <p class="modal-intro" id="authIntro">Войди в аккаунт, чтобы продолжить.</p>
+
+        <div id="signedInPanel" hidden>
+            <div class="account-state">
+                <span>Ты вошёл как</span>
+                <strong id="signedInEmail"></strong>
+            </div>
+            <button class="btn" id="signOutButton" type="button">Выйти из аккаунта</button>
+        </div>
+
+        <div id="authFormArea">
+            <div class="tabs">
+                <button class="tab active" id="loginTab" type="button">Вход</button>
+                <button class="tab" id="signupTab" type="button">Регистрация</button>
+            </div>
+
+            <form id="authForm">
+                <label class="field">
+                    <span>Электронная почта</span>
+                    <input id="emailInput" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="254">
+                </label>
+
+                <label class="field">
+                    <span>Пароль</span>
+                    <input id="passwordInput" type="password" autocomplete="current-password" placeholder="Минимум 8 символов" required minlength="8" maxlength="128">
+                </label>
+
+                <button class="btn btn-primary" id="authSubmit" type="submit">Войти</button>
+            </form>
+
+            <p class="modal-help">
+                При регистрации может потребоваться подтверждение электронной почты.
+                Не используй пароль от других сайтов.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="false"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+(() => {
+    'use strict';
+
+    /*
+     * Конфигурация Supabase.
+     * Здесь используется публичный Publishable key.
+     * Никогда не размещай service_role или secret key во frontend.
+     */
+
+    const SUPABASE_URL = 'https://ffhwueictzhtzqexqimm.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_uxxzLH--0JEFZaxvUwgkRA_L3qSXxWQ';
+
+    const configured =
+        SUPABASE_PUBLISHABLE_KEY.startsWith('sb_publishable_') &&
+        !SUPABASE_PUBLISHABLE_KEY.includes('PASTE_');
+
+    let supabaseClient = null;
+    let currentSession = null;
+    let authMode = 'login';
+
+    /* ЭЛЕМЕНТЫ */
+
+    const authBackdrop = document.getElementById('authBackdrop');
+    const authForm = document.getElementById('authForm');
+    const authFormArea = document.getElementById('authFormArea');
+    const signedInPanel = document.getElementById('signedInPanel');
+    const authTitle = document.getElementById('authTitle');
+    const authIntro = document.getElementById('authIntro');
+    const loginTab = document.getElementById('loginTab');
+    const signupTab = document.getElementById('signupTab');
+    const authSubmit = document.getElementById('authSubmit');
+    const emailInput = document.getElementById('emailInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const accountButton = document.getElementById('accountButton');
+    const toastStack = document.getElementById('toastStack');
+
+    /* УВЕДОМЛЕНИЯ */
+
+    function toast(title, detail = '', type = 'success') {
+        const item = document.createElement('div');
+        item.className = 'toast ' + type;
+
+        const strong = document.createElement('strong');
+        strong.textContent = title;
+        item.appendChild(strong);
+
+        if (detail) {
+            const small = document.createElement('small');
+            small.textContent = detail;
+            item.appendChild(small);
         }
 
-        * {
-            box-sizing: border-box;
+        toastStack.appendChild(item);
+
+        window.setTimeout(() => {
+            item.remove();
+        }, 5200);
+    }
+
+    /* ПЕРЕВОД ОШИБОК */
+
+    function readableError(message) {
+        const value = String(message || '').toLowerCase();
+
+        if (value.includes('invalid login credentials')) {
+            return 'Неверная почта или пароль.';
+        }
+        if (value.includes('email not confirmed')) {
+            return 'Подтверди почту через письмо от Supabase.';
+        }
+        if (value.includes('user already registered')) {
+            return 'Аккаунт с этой почтой уже существует.';
+        }
+        if (value.includes('password')) {
+            return 'Проверь пароль. Требуется минимум 8 символов.';
+        }
+        if (value.includes('rate limit')) {
+            return 'Слишком много попыток. Попробуй позже.';
+        }
+        if (value.includes('fetch') || value.includes('network')) {
+            return 'Не удалось подключиться к Supabase. Проверь интернет.';
         }
 
-        html {
-            scroll-behavior: smooth;
+        return message || 'Неизвестная ошибка. Попробуй ещё раз.';
+    }
+
+    /* ОКНО АККАУНТА */
+
+    function openAuth(mode = 'login') {
+        setAuthMode(mode);
+        renderAuthState();
+
+        authBackdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+
+        if (!currentSession) {
+            window.setTimeout(() => emailInput.focus(), 100);
+        }
+    }
+
+    function closeAuth() {
+        authBackdrop.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function setAuthMode(mode) {
+        authMode = mode;
+
+        loginTab.classList.toggle('active', mode === 'login');
+        signupTab.classList.toggle('active', mode === 'signup');
+
+        if (!currentSession) {
+            authTitle.textContent =
+                mode === 'login' ? 'С возвращением' : 'Создать аккаунт';
+
+            authIntro.textContent =
+                mode === 'login'
+                    ? 'Войди в аккаунт, чтобы продолжить.'
+                    : 'Зарегистрируйся с помощью электронной почты.';
+
+            authSubmit.textContent =
+                mode === 'login' ? 'Войти' : 'Создать аккаунт';
+
+            passwordInput.autocomplete =
+                mode === 'login' ? 'current-password' : 'new-password';
+        }
+    }
+
+    function renderAuthState() {
+        const signedIn = Boolean(currentSession && currentSession.user);
+
+        signedInPanel.hidden = !signedIn;
+        authFormArea.hidden = signedIn;
+
+        accountButton.textContent = signedIn ? 'Мой аккаунт' : 'Войти';
+
+        if (signedIn) {
+            document.getElementById('signedInEmail').textContent =
+                currentSession.user.email || 'Аккаунт Bear Visuals';
+
+            authTitle.textContent = 'Твой аккаунт';
+            authIntro.textContent =
+                'Ты вошёл в аккаунт Bear Visuals. Оплата пока не подключена.';
+        } else {
+            setAuthMode(authMode);
+        }
+    }
+
+    /* ПРОВЕРКА СЕССИИ */
+
+    async function refreshSession() {
+        if (!supabaseClient) {
+            return;
         }
 
-        body {
-            margin: 0;
-            background:
-                radial-gradient(
-                    ellipse at 50% 0%,
-                    rgba(139, 90, 43, 0.16),
-                    transparent 42%
-                ),
-                var(--bg);
-            color: var(--text);
-            font-family: Manrope, "Segoe UI", Arial, sans-serif;
-            line-height: 1.55;
+        try {
+            const { data, error } = await supabaseClient.auth.getSession();
+
+            if (error) {
+                throw error;
+            }
+
+            currentSession = data && data.session ? data.session : null;
+            renderAuthState();
+        } catch (error) {
+            console.error('[Bear Visuals] Ошибка проверки сессии:', error);
+        }
+    }
+
+    /* КНОПКИ ОКНА */
+
+    document.getElementById('closeAuth').addEventListener('click', closeAuth);
+
+    authBackdrop.addEventListener('click', (event) => {
+        if (event.target === authBackdrop) {
+            closeAuth();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeAuth();
+        }
+    });
+
+    loginTab.addEventListener('click', () => setAuthMode('login'));
+    signupTab.addEventListener('click', () => setAuthMode('signup'));
+
+    accountButton.addEventListener('click', () => openAuth('login'));
+
+    document.getElementById('heroAccountButton').addEventListener(
+        'click',
+        () => openAuth('login')
+    );
+
+    document.getElementById('bottomAccountButton').addEventListener(
+        'click',
+        () => openAuth('login')
+    );
+
+    /* РЕГИСТРАЦИЯ И ВХОД */
+
+    authForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!configured || !supabaseClient) {
+            toast(
+                'Не удалось подключить Supabase',
+                'Проверь Publishable key и подключение к Supabase.',
+                'error'
+            );
+            return;
         }
 
-        body.modal-open {
-            overflow: hidden;
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        if (password.length < 8) {
+            toast(
+                'Слишком короткий пароль',
+                'Используй не менее 8 символов.',
+                'error'
+            );
+            return;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
+        authSubmit.disabled = true;
+        authSubmit.textContent =
+            authMode === 'login' ? 'Входим…' : 'Создаём аккаунт…';
+
+        try {
+            let result;
+
+            if (authMode === 'signup') {
+                result = await supabaseClient.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        emailRedirectTo:
+                            window.location.origin + window.location.pathname
+                    }
+                });
+            } else {
+                result = await supabaseClient.auth.signInWithPassword({
+                    email,
+                    password
+                });
+            }
+
+            if (result.error) {
+                throw result.error;
+            }
+
+            currentSession = result.data.session || null;
+
+            if (authMode === 'signup' && !currentSession) {
+                toast(
+                    'Проверь электронную почту',
+                    'Если подтверждение включено, открой письмо от Supabase.',
+                    'success'
+                );
+            } else {
+                toast(
+                    authMode === 'signup' ? 'Аккаунт создан' : 'Вход выполнен',
+                    'Добро пожаловать в Bear Visuals.',
+                    'success'
+                );
+            }
+
+            renderAuthState();
+
+            if (currentSession) {
+                closeAuth();
+            }
+        } catch (error) {
+            console.error('[Bear Visuals] Ошибка входа/регистрации:', error);
+
+            toast(
+                'Не удалось выполнить действие',
+                readableError(error.message),
+                'error'
+            );
+        } finally {
+            authSubmit.disabled = false;
+            authSubmit.textContent =
+                authMode === 'login' ? 'Войти' : 'Создать аккаунт';
         }
+    });
 
-        button,
-        input {
-            font: inherit;
+    /* ВЫХОД ИЗ АККАУНТА */
+
+    document.getElementById('signOutButton').addEventListener(
+        'click',
+        async () => {
+            if (!supabaseClient) {
+                toast('Supabase не подключён', '', 'error');
+                return;
+            }
+
+            try {
+                const { error } = await supabaseClient.auth.signOut();
+
+                if (error) {
+                    throw error;
+                }
+
+                currentSession = null;
+                renderAuthState();
+                closeAuth();
+
+                toast('Ты вышел из аккаунта', 'До встречи!', 'success');
+            } catch (error) {
+                console.error('[Bear Visuals] Ошибка выхода:', error);
+
+                toast(
+                    'Не удалось выйти',
+                    readableError(error.message),
+                    'error'
+                );
+            }
         }
+    );
 
-        button {
-            cursor: pointer;
+    /* ВЫБОР ТАРИФА */
+
+    document.querySelectorAll('[data-buy]').forEach((button) => {
+        button.addEventListener('click', async () => {
+            const plan = button.dataset.buy;
+
+            if (!currentSession || !currentSession.user) {
+                toast(
+                    'Сначала войди',
+                    'Для покупки нужен аккаунт Bear Visuals.',
+                    'error'
+                );
+
+                openAuth('signup');
+                return;
+            }
+
+            if (!supabaseClient) {
+                toast(
+                    'Оплата ещё не настроена',
+                    'Сервер покупки пока не подключён.',
+                    'error'
+                );
+                return;
+            }
+
+            const originalText = button.textContent;
+            button.disabled = true;
+            button.textContent = 'Открываем оплату…';
+
+            try {
+                /*
+                 * Для настоящей покупки потребуется серверная Edge Function
+                 * create-checkout и подключённый платёжный провайдер.
+                 * Цена должна проверяться и задаваться на сервере.
+                 */
+
+                const { data, error } =
+                    await supabaseClient.functions.invoke('create-checkout', {
+                        body: { plan }
+                    });
+
+                if (error) {
+                    throw error;
+                }
+
+                if (!data || typeof data.url !== 'string') {
+                    throw new Error('Ссылка на оплату не получена.');
+                }
+
+                window.location.assign(data.url);
+            } catch (error) {
+                console.error('[Bear Visuals] Ошибка оплаты:', error);
+
+                toast(
+                    'Оплата пока не настроена',
+                    'Нужна серверная функция create-checkout и платёжный провайдер. Списание не выполнено.',
+                    'error'
+                );
+            } finally {
+                button.disabled = false;
+                button.textContent = originalText;
+            }
+        });
+    });
+
+    /* ПОДКЛЮЧЕНИЕ SUPABASE */
+
+    if (!window.supabase) {
+        console.error('[Bear Visuals] Supabase JS не загрузился.');
+    } else if (configured) {
+        try {
+            supabaseClient = window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            );
+
+            refreshSession();
+
+            supabaseClient.auth.onAuthStateChange((_event, session) => {
+                currentSession = session || null;
+                renderAuthState();
+            });
+        } catch (error) {
+            console.error('[Bear Visuals] Ошибка запуска Supabase:', error);
         }
+    } else {
+        console.warn('[Bear Visuals] Проверь Publishable key.');
+    }
 
-        button:disabled {
-            opacity: 0.55;
-            cursor: wait;
-        }
+    /* УВЕДОМЛЕНИЕ ПОСЛЕ ВОЗВРАТА С ОПЛАТЫ */
 
-        [hidden] {
-            display: none !important;
-        }
+    const params = new URLSearchParams(window.location.search);
 
-        .wrap {
-            width: min(var(--max-width), calc(100% - 40px));
-            margin: auto;
-        }
+    if (params.get('payment') === 'success') {
+        toast(
+            'Возвращение с оплаты',
+            'Статус заказа должен быть подтверждён сервером.',
+            'success'
+        );
+    } else if (params.get('payment') === 'cancel') {
+        toast(
+            'Покупка отменена',
+            'Ты можешь попробовать снова.',
+            'error'
+        );
+    }
+})();
+</script>
 
-        /* HEADER */
-
-        .nav {
-            min-height: 78px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 22px;
-            border-bottom: 1px solid rgba(210, 154, 97, 0.09);
-        }
-
-        .brand {
-            display: inline-flex;
-            align-items: center;
-            gap: 11px;
-            font-weight: 800;
-            font-size: 17px;
-            letter-spacing: -0.4px;
-        }
-
-        .brand-mark {
-            width: 40px;
-            height: 40px;
-            display: grid;
-            place-items: center;
-            flex-shrink: 0;
-            border-radius: 12px;
-            border: 1px solid rgba(210, 154, 97, 0.42);
-            background: linear-gradient(145deg, #57351f, #24160f);
-            box-shadow: 0 0 24px rgba(184, 121, 62, 0.12);
-            color: var(--gold);
-            font-size: 22px;
-        }
-
-        .brand small {
-            display: block;
-            color: var(--soft);
-            font-size: 9px;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            color: #c1b0a3;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .nav-links a:hover,
-        .footer-links a:hover {
-            color: var(--gold);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-        }
-
-        .btn {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            min-height: 43px;
-            padding: 0 17px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.025);
-            color: var(--text);
-            font-size: 12px;
-            font-weight: 800;
-            transition: transform 0.18s, border-color 0.18s;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            border-color: rgba(210, 154, 97, 0.5);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #b8793e, #8b5a2b);
-            border-color: rgba(255, 221, 181, 0.12);
-            box-shadow: 0 7px 26px rgba(139, 90, 43, 0.16);
-        }
-
-        .btn-primary:hover {
-            filter: brightness(1.1);
-        }
-
-        /* HERO */
-
-        .hero {
-            padding: 82px 0 70px;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            align
+</body>
+</html>
